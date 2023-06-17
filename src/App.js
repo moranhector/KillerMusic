@@ -65,10 +65,14 @@ function App() {
   return (
     <div className="App">
 
+      <header className="App-header">
+        <h1>KILLER MUSIC: A BETTER SPOTIFY APP</h1>
+      </header>      
+
       <Container>
           <InputGroup className="mb-3" size="lg">
               <FormControl
-                  placeholder="Search For Artist"
+                  placeholder="Artista:"
                   type="input"
                   onKeyPress={event => {
                   if (event.key === "Enter") {
@@ -78,7 +82,7 @@ function App() {
                   onChange={ event => {setSearchInput(event.target.value)}}
               />
               <Button onClick={ Search }>
-                Search
+                Buscar
               </Button>
               
           </InputGroup>
@@ -89,9 +93,9 @@ function App() {
                       console.log(album);
                       return (
                         <Card>
-                          <Card.Img src="#"/>
+                          <Card.Img src={album.images[0].url} />
                           <Card.Body>
-                            <Card.Title> Album Name here </Card.Title>
+                            <Card.Title>{album.name } </Card.Title>
                           </Card.Body>
                       </Card> 
                       )                     
