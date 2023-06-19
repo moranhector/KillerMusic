@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
-
-import { ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 function SecondScreen() {
     const { param1, param2 } = useParams();
@@ -12,10 +10,7 @@ function SecondScreen() {
     const [tracks, setTracks] = useState([]);
 
     useEffect(() => {
-        console.log("Parámetro recibido 1:", param1);
-        console.log("Parámetro recibido 2:", param2);
-
-        var searchParameters = {
+        const searchParameters = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,68 +18,50 @@ function SecondScreen() {
             }
         };
 
-        //console.log('ruta', `https://api.spotify.com/v1/albums/${param1}/tracks`);
-
-        //Acá hago la búsqueda de album con sus tracks
         fetch(`https://api.spotify.com/v1/albums/${param1}/tracks`, searchParameters)
             .then(response => response.json())
             .then(data => {
                 setTracks(data.items);
-                console.log("tracks data items", data.items);
+                console.log(data.items);
             });
 
-
-
-        //Acá hago la búsqueda LA INFO DEL ALBUM
         fetch(`https://api.spotify.com/v1/albums/${param1}`, searchParameters)
             .then(response => response.json())
             .then(data => {
-
                 setTapaAlbum(data.images[0].url);
-                console.log("ALBUM ", data.images[0].url);
             });
-
-
-
     }, [param1, param2]);
 
     return (
-        <div>
-            {/* <h1>Pantalla secundaria</h1>
-            <p>Parámetro recibido 1: {param1}</p>
-            <p>Parámetro recibido 2: {param2}</p> */}
-
-
-            <Container>
-                <Row className="mx-2 row row-cols-4">
-
-
-                   
+        <Container>
+            <Row className="mt-3">
+                <Col>
                     <Card>
-                        <Card.Img src={tapaAlbum} />
+                        <Card.Img variant="top" src={tapaAlbum} />
                         <Card.Body>
-                            <Card.Title>ALBUM</Card.Title>
-                            <Card.Title>CANCIO</Card.Title>
+                            <Card.Title>Álbum</Card.Title>
                         </Card.Body>
-
-
-                        <h2>Lista de canciones</h2>
-
-                        <ListGroup>
-                            {tracks.map((tracks, i ) => (
-                                <ListGroup.Item key={tracks.id}>{tracks.name}</ListGroup.Item>
-                            ))}
-                        </ListGroup>
-
-
                     </Card>
-                 
+                </Col>
+            </Row>
+            <Row className="mt-3">
+                <Col>
+                    <h2>Lista de canciones</h2>
+                    <ListGroup>
+                        {tracks.map(track => (
+                            <ListGroup.Item key={track.id}>
 
+                                <span>{track.track_number}. </span>
+                                {track.name}
+                                <span className="ml-2">Duración: {track.duration_ms} ms</span>
+                                <input type="number" min="1" max="10" placeholder="Calificación" />
 
-                </Row>
-            </Container>
-
-        </div>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
