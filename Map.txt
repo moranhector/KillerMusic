@@ -1,0 +1,103 @@
+
+
+
+album
+id integer
+spotify_id string
+artist_id
+name string  
+release_date string
+tipo string ( album, single, appears_on, compilations )
+market string
+images string
+total_tracks
+uri string 
+genres string
+label string
+popularity:  integer
+productor_id integer
+
+
+
+tracks
+id integer
+spotify_id integer
+album_id integer
+name string 
+duration_ms integer
+disc_number integer
+track_number integer
+external_urls string
+
+
+artistas
+id integer string
+  spotify_id: string,
+  external_urls:  string
+  followers:  integer  
+  genres: string
+  href: string,
+  images: string,
+  name: string,
+  popularity:  integer
+  type: artist,
+  uri: string
+  pais : string
+
+
+
+
+user
+
+user_artista 
+id integer
+user_id integer
+artista_id integer
+calificacion integer
+date_added datetime
+
+
+user_album
+id integer
+user_id integer
+album_id integer
+calificacion integer
+date_added datetime
+
+
+user_tracks
+id integer
+user_id integer
+track_id integer
+calificacion integer
+date_added datetime
+
+
+album_comment   ( criticas, historia, personal)
+id integer
+link string
+comment text 
+date_added datetime
+
+Artistas similares Ejemplo de PinkFloyd: Yes, Genesis,etc 
+
+Tracks similares Ejemplo de Soda Stereo - Sueles Dejarme Solo : The Cure - Tres chicos imaginarios
+
+album_similares 
+
+
+tracks_videos ( para almacenar videos de Youtube de canciones)
+id integer 
+track_id integer
+youtube string 
+is_oficial string
+is_hd   string
+is_live string
+calificacion integer
+date_added datetime
+
+album_images tapas de coveralia
+id integer
+link string
+comment text 
+date_added datetime
